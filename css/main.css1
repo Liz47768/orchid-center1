@@ -88,7 +88,7 @@ main. bg-pink {
 	 width: 100%;
 }
 .bg-dark {
-	background-color: #39595C !important;
+	background-color: #39595C;
 	color: #F7CCE1;
 }
 .bg-light {
