@@ -194,7 +194,7 @@
 						            }
 						        };
 						        
-						        // Обработчик кнопки подтверждения
+						        // Обработчик кнопки закрытия
 						        document.getElementById('verifyButton').addEventListener('click', function() {
 						            if (isVerified) {
 						                // Получаем токен от капчи
@@ -211,15 +211,17 @@
 						                    // Через 2 секунды закрываем модальное окно
 						                    setTimeout(function() {
 						                        $('#captchaModal').modal('hide');
+												$('.modal-backdrop').remove();
+												$('body').removeClass('modal-open');
 						                        // Сбрасываем капчу для следующего использования
-						                        setTimeout(function() {
-						                            grecaptcha.reset(recaptchaWidgetId);
-						                            isVerified = false;
-						                            document.getElementById('verifyButton').disabled = true;
-						                            document.getElementById('captchaStatus').innerHTML = '';
-						                        }, 500);
-						                    }, 2000);
-						                } else {
+						                    setTimeout(function() {
+						                        grecaptcha.reset(recaptchaWidgetId);
+						                        isVerified = false;
+						                        document.getElementById('verifyButton').disabled = true;
+						                        document.getElementById('captchaStatus').innerHTML = '';
+						                    }, 500);
+						                }, 2000);
+						            } else {
 						                    document.getElementById('captchaStatus').innerHTML = '✗ Ошибка: не удалось получить токен';
 						                    document.getElementById('captchaStatus').style.color = '39595C';
 						                }
