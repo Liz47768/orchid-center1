@@ -1,0 +1,148 @@
+body {
+	font-family: "Tenor Sans", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+header, footer {
+	position: relative;
+}
+. container {
+	max-width: 1200 px;
+	margin: 0 auto;
+}
+header ul {
+	margin: 0;
+	padding: 0;
+}
+header ul li{
+	display: inline-block;
+	padding: 20 px 20 px;
+	line-height: 24 px;
+	font-size: 20 px;
+	}
+header ul li a {
+	color: #F7CCE1;
+}
+header ul li a:hover {
+	color: #F7CCE1;
+	text-decoration: none;
+}
+header a {
+	color: #F7CCE1;
+}
+header a:hover {
+	color: #F7CCE1;
+	text-decoration: none;
+}
+header. wrap_phone {
+	display: flex;
+	align-items: center;
+}
+header. header-img {
+	margin-top: 186px;
+}
+header. h3 {
+	display: inline-block;
+	font-size: 40px;
+	color: #F7CCE1;
+}
+main. bg-light {
+	position: relative;
+}
+main. bg-purple {
+	position: relative;
+}
+main. bg-pink {
+	position: relative;
+}
+.border1_img {
+	 background-image: url(../images/border1.png);
+	 height: 55px;
+	 background-position: center;
+	 position: absolute;
+	 bottom: -55px;
+	 width: 100%;
+}
+.border2_img {
+	 background-image: url(../images/border2.png);
+	 height: 55px;
+	 background-position: center;
+	 position: absolute;
+	 bottom: -650px;
+	 width: 100%;
+}
+.border3_img {
+	 background-image: url(../images/border3.png);
+	 height: 55px;
+	 background-position: center;
+	 position: absolute;
+	 bottom: -1490px;
+	 width: 100%;
+}
+.border4_img {
+	 background-image: url(../images/border4.png);
+	 height: 55px;
+	 background-position: center;
+	 position: absolute;
+	 bottom: -2500px;
+	 width: 100%;
+}
+.bg-dark {
+	background-color: #39595C !important;
+	color: #F7CCE1;
+}
+.bg-light {
+	background-color: #CDE5EC !important;
+	color: #5A132B;
+}
+.bg-purple {
+	background-color: #902D56 !important;
+	color: #F7CCE1;
+}
+.bg-pink {
+	background-color: #F7CCE1 !important;
+	color: #39595C;
+}
+.bg-dark-footer {
+	background-color: #39595C !important;
+	color: #F7CCE1;
+}
+.btn_my_purple {
+	background: #5A132B;
+	border-radius: 83px;
+	display: inline-block;
+	padding: 20px 30px;
+	color: #CDE5EC;
+	font-size: 24px;
+}
+.btn_my_purple:hover {
+	color: #CDE5EC;
+	text-decoration: none;
+}
+.btn_my_pink {
+	background: #F7CCE1;
+	border-radius: 83px;
+	display: inline-block;
+	padding: 20px 30px;
+	color: #5A132B;
+	font-size: 24px;
+}
+.btn_my_pink:hover {
+	color: #5A132B;
+	text-decoration: none;
+}
+.btn_my_dark {
+	background: #39595C;
+	border-radius: 83px;
+	display: inline-block;
+	padding: 20px 30px;
+	color: #F0A6C9;
+	font-size: 24px;
+}
+.btn_my_dark:hover {
+	color: #F0A6C9;
+	text-decoration: none;
+}
+.icons_group {
+	float: right;
+}
