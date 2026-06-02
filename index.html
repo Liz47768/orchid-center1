@@ -124,125 +124,121 @@
 							<button type="button" style="background: #5A132B; border-radius: 83px; display: inline-block; padding: 20px 30px; font-size: 24px; color: #CDE5EC;"><a style="text-decoration: none;  color: #CDE5EC;" href="" class="btn_my_1" data-toggle="modal" data-target="#captchaModal" style="background-color: #39595C; border: none;">
             Проверить, что я не робот> ЗАДАТЬ ВОПРОС </a></button>
 							   <div class="modal fade" id="captchaModal" tabindex="-1" role="dialog" aria-labelledby="captchaModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="captchaModalLabel">Подтверждение личности</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h6>Пожалуйста, подтвердите, что вы не робот:</h6>
-                    <div id="recaptcha-container" class="g-recaptcha"></div>
-                    <button id="verifyButton" class="verify-btn" disabled>Подтвердить</button>
-                    <div id="captchaStatus" class="captcha-status"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-	    <script>
-        // Ваш публичный ключ Google reCAPTCHA
-        // ВНИМАНИЕ: "6равпттымкпы" - это невалидный ключ. Замените на реальный ключ от Google!
-        // Реальный ключ выглядит примерно так: "6LcHxZkUAAAAAB2MkXzQ5xXx5xXx5xXx5xXx5xX"
-        const SITE_KEY = "6Ld-VQktAAAAAKDDuwTdBKqqu9omx1lGVyfjzuKt";
-        
-        let recaptchaWidgetId = null;
-        let isVerified = false;
-        
-        // Функция обратного вызова при загрузке reCAPTCHA
-        window.onRecaptchaLoad = function() {
-            if (document.getElementById('recaptcha-container')) {
-                recaptchaWidgetId = grecaptcha.render('recaptcha-container', {
-                    'sitekey': SITE_KEY,
-                    'callback': function(response) {
-                        // Пользователь успешно прошел капчу
-                        isVerified = true;
-                        document.getElementById('verifyButton').disabled = false;
-                        document.getElementById('captchaStatus').innerHTML = '✓ Капча пройдена! Нажмите "Подтвердить"';
-                        document.getElementById('captchaStatus').style.color = '#28a745';
-                    },
-                    'expired-callback': function() {
-                        // Капча истекла
-                        isVerified = false;
-                        document.getElementById('verifyButton').disabled = true;
-                        document.getElementById('captchaStatus').innerHTML = '✗ Время проверки истекло, попробуйте снова';
-                        document.getElementById('captchaStatus').style.color = '#dc3545';
-                        grecaptcha.reset(recaptchaWidgetId);
-                    },
-                    'error-callback': function() {
-                        console.error('Ошибка загрузки reCAPTCHA');
-                        document.getElementById('captchaStatus').innerHTML = '✗ Ошибка загрузки капчи. Проверьте ключ.';
-                        document.getElementById('captchaStatus').style.color = '#dc3545';
-                    }
-                });
-            }
-        };
-        
-        // Альтернативный способ загрузки, если window.onRecaptchaLoad не сработал
-        window.onload = function() {
-            if (typeof grecaptcha !== 'undefined' && grecaptcha.render) {
-                window.onRecaptchaLoad();
-            } else {
-                // Ждем загрузки reCAPTCHA API
-                setTimeout(function() {
-                    if (typeof grecaptcha !== 'undefined' && grecaptcha.render) {
-                        window.onRecaptchaLoad();
-                    } else {
-                        console.error('reCAPTCHA не загрузилась');
-                        document.getElementById('captchaStatus').innerHTML = '✗ Ошибка загрузки капчи. Проверьте интернет-соединение.';
-                        document.getElementById('captchaStatus').style.color = '#dc3545';
-                    }
-                }, 2000);
-            }
-        };
-        
-        // Обработчик кнопки подтверждения
-        document.getElementById('verifyButton').addEventListener('click', function() {
-            if (isVerified) {
-                // Получаем токен от капчи
-                const token = grecaptcha.getResponse(recaptchaWidgetId);
-                
-                if (token) {
-                    // Здесь вы можете отправить токен на сервер для верификации
-                    console.log('Токен капчи получен:', token);
-                    
-                    // Показываем сообщение об успехе
-                    document.getElementById('captchaStatus').innerHTML = '✓ Проверка успешно пройдена! Вы не робот.';
-                    document.getElementById('captchaStatus').style.color = '#28a745';
-                    
-                    // Через 2 секунды закрываем модальное окно
-                    setTimeout(function() {
-                        $('#captchaModal').modal('hide');
-                        // Сбрасываем капчу для следующего использования
-                        setTimeout(function() {
-                            grecaptcha.reset(recaptchaWidgetId);
-                            isVerified = false;
-                            document.getElementById('verifyButton').disabled = true;
-                            document.getElementById('captchaStatus').innerHTML = '';
-                        }, 500);
-                    }, 2000);
-                } else {
-                    document.getElementById('captchaStatus').innerHTML = '✗ Ошибка: не удалось получить токен';
-                    document.getElementById('captchaStatus').style.color = '#dc3545';
-                }
-            }
-        });
-        
-        // При закрытии модального окна сбрасываем капчу
-        $('#captchaModal').on('hidden.bs.modal', function () {
-            if (recaptchaWidgetId !== null && typeof grecaptcha !== 'undefined') {
-                grecaptcha.reset(recaptchaWidgetId);
-                isVerified = false;
-                document.getElementById('verifyButton').disabled = true;
-                document.getElementById('captchaStatus').innerHTML = '';
-            }
-        });
-    </script>
-    
-    <!-- Ручная загрузка reCAPTCHA API с правильным ключом -->
-    <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
-    
+						       <div class="modal-dialog modal-dialog-centered" role="document">
+						           <div class="modal-content">
+						               <div class="modal-header">
+						                   <h5 class="modal-title" id="captchaModalLabel">Подтверждение личности</h5>
+						                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						                        <span aria-hidden="true">&times;</span>
+						                   </button>
+						                </div>
+						                <div class="modal-body">
+						                    <h6>Пожалуйста, подтвердите, что вы не робот:</h6>
+						                    <div id="recaptcha-container" class="g-recaptcha"></div>
+						                    <button id="verifyButton" class="verify-btn" disabled>Подтвердить</button>
+						                    <div id="captchaStatus" class="captcha-status"></div>
+						                </div>
+						           </div>
+						        </div>
+						   </div>
+								<script>
+						        const SITE_KEY = "6Ld-VQktAAAAAKDDuwTdBKqqu9omx1lGVyfjzuKt";
+						        
+						        let recaptchaWidgetId = null;
+						        let isVerified = false;
+						        
+						        // Функция обратного вызова при загрузке reCAPTCHA
+						        window.onRecaptchaLoad = function() {
+						            if (document.getElementById('recaptcha-container')) {
+						                recaptchaWidgetId = grecaptcha.render('recaptcha-container', {
+						                    'sitekey': SITE_KEY,
+						                    'callback': function(response) {
+						                        // Пользователь успешно прошел капчу
+						                        isVerified = true;
+						                        document.getElementById('verifyButton').disabled = false;
+						                        document.getElementById('captchaStatus').innerHTML = '✓ Капча пройдена! Нажмите "Подтвердить"';
+						                        document.getElementById('captchaStatus').style.color = '#28a745';
+						                    },
+						                    'expired-callback': function() {
+						                        // Капча истекла
+						                        isVerified = false;
+						                        document.getElementById('verifyButton').disabled = true;
+						                        document.getElementById('captchaStatus').innerHTML = '✗ Время проверки истекло, попробуйте снова';
+						                        document.getElementById('captchaStatus').style.color = '#dc3545';
+						                        grecaptcha.reset(recaptchaWidgetId);
+						                    },
+						                    'error-callback': function() {
+						                        console.error('Ошибка загрузки reCAPTCHA');
+						                        document.getElementById('captchaStatus').innerHTML = '✗ Ошибка загрузки капчи. Проверьте ключ.';
+						                        document.getElementById('captchaStatus').style.color = '#dc3545';
+						                    }
+						                });
+						            }
+						        };
+						        
+						        // Альтернативный способ загрузки, если window.onRecaptchaLoad не сработал
+						        window.onload = function() {
+						            if (typeof grecaptcha !== 'undefined' && grecaptcha.render) {
+						                window.onRecaptchaLoad();
+						            } else {
+						                // Ждем загрузки reCAPTCHA API
+						                setTimeout(function() {
+						                    if (typeof grecaptcha !== 'undefined' && grecaptcha.render) {
+						                        window.onRecaptchaLoad();
+						                    } else {
+						                        console.error('reCAPTCHA не загрузилась');
+						                        document.getElementById('captchaStatus').innerHTML = '✗ Ошибка загрузки капчи. Проверьте интернет-соединение.';
+						                        document.getElementById('captchaStatus').style.color = '#dc3545';
+						                    }
+						                }, 2000);
+						            }
+						        };
+						        
+						        // Обработчик кнопки подтверждения
+						        document.getElementById('verifyButton').addEventListener('click', function() {
+						            if (isVerified) {
+						                // Получаем токен от капчи
+						                const token = grecaptcha.getResponse(recaptchaWidgetId);
+						                
+						                if (token) {
+						                    // Здесь вы можете отправить токен на сервер для верификации
+						                    console.log('Токен капчи получен:', token);
+						                    
+						                    // Показываем сообщение об успехе
+						                    document.getElementById('captchaStatus').innerHTML = '✓ Проверка успешно пройдена! Вы не робот.';
+						                    document.getElementById('captchaStatus').style.color = '#28a745';
+						                    
+						                    // Через 2 секунды закрываем модальное окно
+						                    setTimeout(function() {
+						                        $('#captchaModal').modal('hide');
+						                        // Сбрасываем капчу для следующего использования
+						                        setTimeout(function() {
+						                            grecaptcha.reset(recaptchaWidgetId);
+						                            isVerified = false;
+						                            document.getElementById('verifyButton').disabled = true;
+						                            document.getElementById('captchaStatus').innerHTML = '';
+						                        }, 500);
+						                    }, 2000);
+						                } else {
+						                    document.getElementById('captchaStatus').innerHTML = '✗ Ошибка: не удалось получить токен';
+						                    document.getElementById('captchaStatus').style.color = '#dc3545';
+						                }
+						            }
+						        });
+						        
+						        // При закрытии модального окна сбрасываем капчу
+						        $('#captchaModal').on('hidden.bs.modal', function () {
+						            if (recaptchaWidgetId !== null && typeof grecaptcha !== 'undefined') {
+						                grecaptcha.reset(recaptchaWidgetId);
+						                isVerified = false;
+						                document.getElementById('verifyButton').disabled = true;
+						                document.getElementById('captchaStatus').innerHTML = '';
+						            }
+						        });
+						    </script>
+						    
+						    <!-- Ручная загрузка reCAPTCHA API с правильным ключом -->
+						    <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
 						</div>
 					</div>
 					<div class="col-6 py-5 d-flex align-items-center justify-content-center">
