@@ -46,13 +46,13 @@ header. h3 {
 	font-size: 40px;
 	color: #F7CCE1;
 }
-main. bg-light {
+main. bg-1 {
 	position: relative;
 }
-main. bg-purple {
+main. bg-2 {
 	position: relative;
 }
-main. bg-pink {
+main. bg-3 {
 	position: relative;
 }
 .border1_img {
@@ -87,27 +87,27 @@ main. bg-pink {
 	 bottom: -2500px;
 	 width: 100%;
 }
-.bg-dark {
-	background-color: #329176;
+.bg-1 {
+	background-color: #39595C !important;
 	color: #F7CCE1;
 }
-.bg-light {
+.bg-2 {
 	background-color: #CDE5EC !important;
 	color: #5A132B;
 }
-.bg-purple {
+.bg-3 {
 	background-color: #902D56 !important;
 	color: #F7CCE1;
 }
-.bg-pink {
+.bg-4 {
 	background-color: #F7CCE1 !important;
-	color: #329176;
+	color: #39595C;
 }
-.bg-dark-footer {
+.bg-footer {
 	background-color: #39595C !important;
-	color: #329176;
+	color: #F7CCE1;
 }
-.btn_my_purple {
+.btn_my_1 {
 	background: #5A132B;
 	border-radius: 83px;
 	display: inline-block;
@@ -115,11 +115,11 @@ main. bg-pink {
 	color: #CDE5EC;
 	font-size: 24px;
 }
-.btn_my_purple:hover {
+.btn_my_1:hover {
 	color: #CDE5EC;
 	text-decoration: none;
 }
-.btn_my_pink {
+.btn_my_2 {
 	background: #F7CCE1;
 	border-radius: 83px;
 	display: inline-block;
@@ -127,11 +127,11 @@ main. bg-pink {
 	color: #5A132B;
 	font-size: 24px;
 }
-.btn_my_pink:hover {
+.btn_my_2:hover {
 	color: #5A132B;
 	text-decoration: none;
 }
-.btn_my_dark {
+.btn_my_3 {
 	background: #39595C;
 	border-radius: 83px;
 	display: inline-block;
@@ -139,7 +139,7 @@ main. bg-pink {
 	color: #F0A6C9;
 	font-size: 24px;
 }
-.btn_my_dark:hover {
+.btn_my_3:hover {
 	color: #F0A6C9;
 	text-decoration: none;
 }
