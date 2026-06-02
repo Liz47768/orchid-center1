@@ -121,7 +121,8 @@
 						Вашим запросам 
 						и предпочтениям. </p>
 						<div class="text-center mt-5">
-							<button type="button" style="background: #5A132B; border-radius: 83px; display: inline-block; padding: 20px 30px; font-size: 24px; color: #CDE5EC;"><a style="text-decoration: none;  color: #CDE5EC;" href="" class="btn_my_1" data-toggle="modal" data-target="#captchaModal" style="background-color: #39595C; border: none;"></a></button>
+							<button type="button" style="background: #5A132B; border-radius: 83px; display: inline-block; padding: 20px 30px; font-size: 24px; color: #CDE5EC;"><a style="text-decoration: none;  color: #CDE5EC;" href="" class="btn_my_1" data-toggle="modal" data-target="#captchaModal" style="background-color: #39595C; border: none;">
+            					Проверить, что я не робот</a></button>
 							   <div class="modal fade" id="captchaModal" tabindex="-1" role="dialog" aria-labelledby="captchaModalLabel" aria-hidden="true">
 						       <div class="modal-dialog modal-dialog-centered" role="document">
 						           <div class="modal-content">
@@ -205,7 +206,7 @@
 						                    
 						                    // Показываем сообщение об успехе
 						                    document.getElementById('captchaStatus').innerHTML = '✓ Проверка успешно пройдена! Вы не робот.';
-						                    document.getElementById('captchaStatus').style.color = '#28a745';
+						                    document.getElementById('captchaStatus').style.color = '#39595C';
 						                    
 						                    // Через 2 секунды закрываем модальное окно
 						                    setTimeout(function() {
@@ -220,12 +221,11 @@
 						                    }, 2000);
 						                } else {
 						                    document.getElementById('captchaStatus').innerHTML = '✗ Ошибка: не удалось получить токен';
-						                    document.getElementById('captchaStatus').style.color = '#dc3545';
+						                    document.getElementById('captchaStatus').style.color = '39595C';
 						                }
 						            }
 						        });
-						        
-						        // При закрытии модального окна сбрасываем капчу
+						       // При закрытии модального окна сбрасываем капчу
 						        $('#captchaModal').on('hidden.bs.modal', function () {
 						            if (recaptchaWidgetId !== null && typeof grecaptcha !== 'undefined') {
 						                grecaptcha.reset(recaptchaWidgetId);
@@ -235,8 +235,6 @@
 						            }
 						        });
 						    </script>
-						    
-						    <!-- Ручная загрузка reCAPTCHA API с правильным ключом -->
 						    <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
 						</div>
 					</div>
