@@ -156,7 +156,7 @@
 						                        // Пользователь успешно прошел капчу
 						                        isVerified = true;
 						                        document.getElementById('verifyButton').disabled = false;
-						                        document.getElementById('captchaStatus').innerHTML = '✓ Капча пройдена! Нажмите "Подтвердить"';
+						                        document.getElementById('captchaStatus').innerHTML = '✓ Капча пройдена! Нажмите "Закрыть"';
 						                        document.getElementById('captchaStatus').style.color = '#28a745';
 						                    },
 						                    'expired-callback': function() {
@@ -176,7 +176,7 @@
 						            }
 						        };
 						        
-						        // Альтернативный способ загрузки, если window.onRecaptchaLoad не сработал
+						        // Альтернативный способ загрузки
 						        window.onload = function() {
 						            if (typeof grecaptcha !== 'undefined' && grecaptcha.render) {
 						                window.onRecaptchaLoad();
@@ -213,7 +213,7 @@
 						                        $('#captchaModal').modal('hide');
 												$('.modal-backdrop').remove( );
 												$('body').removeClass('modal-open');
-						                        // Сбрасываем капчу для следующего использования
+						                    // Сбрасываем капчу для следующего использования
 						                    setTimeout(function() {
 						                        grecaptcha.reset(recaptchaWidgetId);
 						                        isVerified = false;
